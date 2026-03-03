@@ -1,94 +1,119 @@
-# Epidaurus Telemedical — Thought Seeing
+﻿# Epidaurus Telemedical
 
-> **AI-powered telemedicine platform** by [Mosae Zorg Industries](https://mosaezorg.com)
+**Thought Seeing™** — Perception-driven neurotechnology for immersive telemedical applications.
+
+> The bridge between artificial intelligence, neuroscience, and human emotion forecasting.
 
 ---
 
-## Overview
+## About
 
-**Epidaurus Telemedical** is a next-generation telehealth platform built around **Thought Seeing** — our proprietary AI-assisted diagnostic engine that helps clinicians surface critical insights during remote consultations.
+Epidaurus Telemedical develops VR-based neurotechnology that leverages conscious state transition protocols for therapeutic perception management. Our platform calibrates immersive environments to circadian biology and neuronal nuclei — enabling a new paradigm in telemedical interaction where thought, not voice or text, mediates the clinical experience.
 
-Named after the ancient Greek sanctuary of Epidaurus, where the sick travelled in search of healing, we carry that mission into the digital age: **world-class healthcare, accessible from anywhere.**
+**Domain:** Digital therapeutics · Neurotechnology · Immersive telemedicine  
+**Parent company:** Mosae Zorg Industries UG (Berlin)  
+**Website:** [epidaurustelemedical.com](https://epidaurustelemedical.com)
 
-## Key Features
+---
 
-| Feature | Description |
-|---------|-------------|
-| 🧠 **Thought Seeing AI** | Synthesises patient history, symptoms, and behavioural cues to support clinical decision-making |
-| 📹 **HD Video Consultations** | Low-latency video visits with screen sharing, annotations, and auto-generated summaries |
-| 📊 **Continuous Monitoring** | Wearable & IoT integration with intelligent alerts for out-of-range vitals |
-| 🔒 **End-to-End Encryption** | HIPAA, GDPR, SOC 2 Type II compliant — data encrypted in transit and at rest |
-| 💊 **Smart Prescriptions** | E-prescribing with drug-interaction checks and pharmacy integration |
-| 🌐 **Multi-language** | Real-time translation across 40+ languages |
+## European Medical Device Regulation (EU MDR)
 
-## How It Works
+Epidaurus Telemedical is pursuing classification and conformity assessment under **Regulation (EU) 2017/745** (Medical Devices Regulation).
 
-1. **Describe** — Patient shares symptoms via AI-guided intake forms  
-2. **Match** — Algorithm selects the best-fit specialist  
-3. **Consult** — Live video visit with real-time AI diagnostic assistance  
-4. **Follow-up** — Automated care plans, prescription delivery, and check-in reminders
+### Intended Classification
 
-## Tech Stack
+| Attribute | Detail |
+|-----------|--------|
+| **Regulation** | EU MDR 2017/745 |
+| **Product category** | Software as a Medical Device (SaMD) |
+| **Intended classification** | Class IIa (Rule 11 — software intended to provide information used for diagnostic or therapeutic decisions) |
+| **Risk classification** | Moderate individual risk |
+| **Notified Body** | To be designated |
 
-- **Frontend:** Static site (HTML/CSS/JS) hosted on GitHub Pages  
-- **Domain:** [epidaurustelemedical.com](https://epidaurustelemedical.com)  
-- **DNS:** IONOS (A records → GitHub Pages IPs, CNAME `www` → `thoughtai.github.io`)  
-- **CI/CD:** GitHub Pages auto-deploy from `main` branch
+### Regulatory Pathway
 
-## Deployment
+**Phase 1 — Pre-submission (Current)**
+- Intended purpose definition and clinical benefit articulation
+- Risk classification confirmation under Annex VIII
+- Quality Management System (QMS) development per ISO 13485:2016
+- Technical documentation preparation per Annex II/III
 
-This site is deployed via **GitHub Pages**:
+**Phase 2 — Standards Compliance**
+- IEC 62304 — Medical device software lifecycle
+- IEC 62366-1 — Usability engineering
+- ISO 14971 — Risk management
+- IEC 81001-5-1 — Cybersecurity for health software
+- ISO 82304-1 — Health software product safety
 
-```
-Branch: main
-Path:   / (root)
-Domain: epidaurustelemedical.com (custom domain via CNAME file)
-HTTPS:  Enforced
-```
+**Phase 3 — Clinical Evaluation**
+- Clinical evaluation per MDCG 2020-1 (SaMD clinical evaluation guidance)
+- Literature review and clinical investigation planning
+- Performance validation of circadian calibration algorithms
+- Emotion forecasting accuracy and safety assessment
 
-### DNS Configuration (IONOS)
+**Phase 4 — Conformity Assessment**
+- Notified Body engagement and audit
+- CE marking and EU Declaration of Conformity
+- EUDAMED registration
+- Post-market surveillance plan (PMSP) and periodic safety update reports (PSUR)
 
-| Type  | Host | Value                  |
-|-------|------|------------------------|
-| A     | @    | 185.199.108.153        |
-| A     | @    | 185.199.109.153        |
-| A     | @    | 185.199.110.153        |
-| A     | @    | 185.199.111.153        |
-| CNAME | www  | thoughtai.github.io    |
+### SaMD Qualification
 
-## Local Development
+Under MDCG 2019-11 (Guidance on qualification and classification of software), the Thought Seeing platform qualifies as a medical device on the basis that it:
 
-```bash
-# Clone the repo
-git clone https://github.com/ThoughtAI/epidaurustelemedical.git
-cd epidaurustelemedical
+- Processes patient-derived neurophysiological data
+- Generates outputs intended to inform therapeutic decisions
+- Operates as standalone software independent of hardware classification
+- Provides perception modulation calibrated to individual circadian and neural parameters
 
-# Open in VS Code
-code .
+### Key Regulatory Documents (In Preparation)
 
-# Serve locally (Python)
-python -m http.server 8000
+- [ ] Intended Purpose Statement
+- [ ] Software of Unknown Provenance (SOUP) register
+- [ ] Software development and maintenance plan (IEC 62304)
+- [ ] Risk management file (ISO 14971)
+- [ ] Clinical evaluation report (CER)
+- [ ] Usability engineering file (IEC 62366-1)
+- [ ] Technical documentation (Annex II)
+- [ ] Post-market clinical follow-up plan (PMCF)
+- [ ] Cybersecurity documentation (IEC 81001-5-1)
 
-# Or with Node
-npx serve .
-```
+---
 
-Then open [http://localhost:8000](http://localhost:8000)
+## Technology Overview
 
-## Project Structure
+### Core Platform
 
-```
-epidaurustelemedical/
-├── index.html    # Main website (Thought Seeing landing page)
-├── CNAME         # Custom domain for GitHub Pages
-└── README.md     # This file
-```
+**Artificial Intelligence** — Adaptive algorithms that learn temporal signatures of individual perception, mapping attention, focus, and insight within each user's neural landscape.
 
-## License
+**Neuroscience** — VR environments calibrated to circadian biology, specifically the suprachiasmatic nucleus (SCN) and associated retinal-hypothalamic pathways, optimising conditions for therapeutic perception and recall.
 
-© 2026 Epidaurus Telemedical · Mosae Zorg Industries. All rights reserved.
+**Emotion Forecasting** — Predictive modelling of affective state transitions, enabling anticipatory clinical response and empathic cross-cultural communication for diverse patient populations.
+
+### Architecture
+
+| Layer | Technology | Infrastructure |
+|-------|-----------|----------------|
+| Frontend | VR-native (mobile, headset, peripherals) | GitHub Pages |
+| Backend | Perception algorithms, SCN calibration engine | Hetzner Cloud |
+| Integration | Host communication API | [OnBakerStreet.com](https://onbakerstreet.com) |
+
+---
+
+## The Name
+
+Epidaurus was the sanctuary of Apollo — the first hospital of the Western world. Patients ascended the mountain to be closest to the healing sun. Within the Abaton, the harmless serpents of Asclepius moved across patients' bodies, inducing a calm from which visions arose — prescriptions from the patients' own consciousness.
+
+The headset is the new Abaton. The calibrated light is the new sun. The algorithm is the serpent.
+
+---
 
 ## Contact
 
-- 📧 hello@epidaurustelemedical.com  
-- 📍 Mosae Zorg Industries, The Netherlands
+- **Web:** [epidaurustelemedical.com](https://epidaurustelemedical.com)
+- **GitHub:** [github.com/ThoughtAI/epidaurustelemedical](https://github.com/ThoughtAI/epidaurustelemedical)
+- **Integration:** [onbakerstreet.com](https://onbakerstreet.com)
+
+---
+
+© 2026 Epidaurus Telemedical — A Mosae Zorg Industries UG initiative.
