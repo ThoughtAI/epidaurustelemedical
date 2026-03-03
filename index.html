@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Epidaurus Telemedical — Thought Seeing</title>
-  <meta name="description" content="Epidaurus Telemedical delivers advanced telemedicine solutions through Thought Seeing — bridging the gap between patients and providers with intelligent, accessible healthcare.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚕️</text></svg>">
+  <meta name="description" content="Thought Seeing — from surgical neuroscience to entertainment. A perception engine that lets you see what others think and share what you see.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👁️</text></svg>">
   <style>
     :root {
       --primary: #0a5e6c;
@@ -18,15 +18,8 @@
       --card-bg: rgba(13, 42, 50, 0.7);
     }
 
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -38,444 +31,201 @@
 
     /* ── Animated background ── */
     .bg-grid {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
+      position: fixed; inset: 0; z-index: -2;
       background:
-        radial-gradient(ellipse at 20% 50%, rgba(10, 94, 108, 0.25) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(40, 181, 161, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 50%, rgba(10,94,108,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(40,181,161,0.12) 0%, transparent 50%),
         linear-gradient(180deg, #050f13 0%, #071a1f 100%);
     }
 
     .bg-grid::after {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(40, 181, 161, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(40, 181, 161, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(40,181,161,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(40,181,161,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
       animation: gridShift 20s linear infinite;
     }
 
     @keyframes gridShift {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(60px, 60px); }
+      0% { transform: translate(0,0); }
+      100% { transform: translate(60px,60px); }
     }
 
     /* ── Navigation ── */
     nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(7, 26, 31, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(40, 181, 161, 0.15);
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(7,26,31,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(40,181,161,0.15);
     }
 
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-    }
+    .logo { font-size: 1.4rem; font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+    .logo span { color: var(--text); font-weight: 300; }
 
-    .logo span {
-      color: var(--text);
-      font-weight: 300;
-    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
+    .nav-medical {
+      padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+      background: rgba(40,181,161,0.12); border: 1px solid var(--accent); color: var(--accent) !important;
+      transition: all 0.3s ease;
     }
+    .nav-medical:hover { background: rgba(40,181,161,0.25) !important; }
 
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.3s;
-    }
+    .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
 
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* ── Hero ── */
+    /* ── Hero with video ── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 8rem 2rem 4rem;
+      position: relative; min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 8rem 2rem 4rem; overflow: hidden;
     }
+
+    .hero-video {
+      position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+      width: auto; height: auto; transform: translate(-50%, -50%);
+      object-fit: cover; z-index: -1;
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 0;
+      background: rgba(5, 15, 19, 0.6);
+    }
+
+    .hero > *:not(.hero-video):not(.hero-overlay) { position: relative; z-index: 1; }
 
     .hero-badge {
-      display: inline-block;
-      padding: 0.4rem 1.2rem;
-      border: 1px solid var(--accent);
-      border-radius: 50px;
-      font-size: 0.85rem;
-      color: var(--accent);
-      margin-bottom: 2rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      display: inline-block; padding: 0.4rem 1.2rem; border: 1px solid var(--accent);
+      border-radius: 50px; font-size: 0.85rem; color: var(--accent);
+      margin-bottom: 2rem; letter-spacing: 1px; text-transform: uppercase;
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-      max-width: 800px;
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.15;
+      margin-bottom: 1.5rem; max-width: 850px;
     }
 
     .hero h1 .highlight {
       background: linear-gradient(135deg, var(--accent), var(--accent-glow));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin-bottom: 2.5rem;
-    }
+    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 650px; margin-bottom: 1rem; }
+    .hero .hero-origin { font-size: 0.95rem; color: var(--text-muted); max-width: 600px; margin-bottom: 2.5rem; font-style: italic; opacity: 0.8; }
 
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
     .btn {
-      display: inline-block;
-      padding: 0.9rem 2.2rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      display: inline-block; padding: 0.9rem 2.2rem; border-radius: 8px;
+      font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer;
     }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--primary-light));
-      color: #fff;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(40, 181, 161, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--accent);
-      border: 1.5px solid var(--accent);
-    }
-
-    .btn-outline:hover {
-      background: rgba(40, 181, 161, 0.1);
-      transform: translateY(-2px);
-    }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--primary-light)); color: #fff; border: none; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(40,181,161,0.3); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    .btn-outline:hover { background: rgba(40,181,161,0.1); transform: translateY(-2px); }
 
     /* ── Sections ── */
-    section {
-      padding: 6rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 0.5rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 1rem; }
+    .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin-bottom: 3rem; }
 
-    .section-label {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 650px;
-      margin-bottom: 3rem;
-    }
-
-    /* ── Feature cards ── */
+    /* ── Feature cards (3 pillars) ── */
     .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
     }
 
     .feature-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(40, 181, 161, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: all 0.3s ease;
+      background: var(--card-bg); border: 1px solid rgba(40,181,161,0.1);
+      border-radius: 16px; padding: 2rem; transition: all 0.3s ease;
     }
-
-    .feature-card:hover {
-      border-color: rgba(40, 181, 161, 0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    }
+    .feature-card:hover { border-color: rgba(40,181,161,0.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
 
     .feature-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
       margin-bottom: 1.2rem;
-      background: linear-gradient(135deg, rgba(40, 181, 161, 0.15), rgba(10, 94, 108, 0.25));
-      border: 1px solid rgba(40, 181, 161, 0.2);
+      background: linear-gradient(135deg, rgba(40,181,161,0.15), rgba(10,94,108,0.25));
+      border: 1px solid rgba(40,181,161,0.2);
     }
 
-    .feature-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.6rem;
-    }
+    .feature-card h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
 
-    .feature-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* ── How It Works ── */
+    /* ── How It Works (3 steps) ── */
     .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-      counter-reset: step;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem; counter-reset: step;
     }
 
-    .step {
-      position: relative;
-      padding: 2rem;
-      text-align: center;
-    }
+    .step { position: relative; padding: 2rem; text-align: center; }
 
     .step::before {
-      counter-increment: step;
-      content: counter(step);
-      display: block;
-      width: 48px;
-      height: 48px;
-      line-height: 48px;
-      border-radius: 50%;
+      counter-increment: step; content: counter(step);
+      display: block; width: 48px; height: 48px; line-height: 48px; border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--primary-light));
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin: 0 auto 1.2rem;
+      color: #fff; font-weight: 700; font-size: 1.1rem; margin: 0 auto 1.2rem;
     }
 
-    .step h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .step p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-    }
+    .step h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .step p { color: var(--text-muted); font-size: 0.92rem; }
 
     /* ── About ── */
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-text p {
-      color: var(--text-muted);
-      margin-bottom: 1.2rem;
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
+    .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text p { color: var(--text-muted); margin-bottom: 1.2rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 
     .stat {
-      background: var(--card-bg);
-      border: 1px solid rgba(40, 181, 161, 0.1);
-      border-radius: 16px;
-      padding: 1.5rem;
-      text-align: center;
+      background: var(--card-bg); border: 1px solid rgba(40,181,161,0.1);
+      border-radius: 16px; padding: 1.5rem; text-align: center;
     }
-
-    .stat-value {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.3rem;
-    }
+    .stat-value { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; }
 
     /* ── Contact ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .contact-info h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+    .contact-info p { color: var(--text-muted); margin-bottom: 2rem; }
+    .contact-detail { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; color: var(--text-muted); }
+    .contact-detail span:first-child { font-size: 1.2rem; }
 
-    .contact-info h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-    }
-
-    .contact-info p {
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
-
-    .contact-detail {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-      color: var(--text-muted);
-    }
-
-    .contact-detail span:first-child {
-      font-size: 1.2rem;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
     .contact-form input,
     .contact-form textarea {
-      background: var(--card-bg);
-      border: 1px solid rgba(40, 181, 161, 0.15);
-      border-radius: 10px;
-      padding: 0.9rem 1.2rem;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.3s;
+      background: var(--card-bg); border: 1px solid rgba(40,181,161,0.15);
+      border-radius: 10px; padding: 0.9rem 1.2rem;
+      color: var(--text); font-family: inherit; font-size: 0.95rem;
+      outline: none; transition: border-color 0.3s;
     }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--accent);
-    }
-
-    .contact-form textarea {
-      min-height: 130px;
-      resize: vertical;
-    }
-
-    .contact-form .btn {
-      border: none;
-      width: fit-content;
-    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form textarea { min-height: 130px; resize: vertical; }
+    .contact-form .btn { border: none; width: fit-content; }
 
     /* ── Footer ── */
-    footer {
-      border-top: 1px solid rgba(40, 181, 161, 0.1);
-      padding: 2.5rem 2rem;
-      text-align: center;
-    }
-
-    footer p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    footer { border-top: 1px solid rgba(40,181,161,0.1); padding: 2.5rem 2rem; text-align: center; }
+    footer p { color: var(--text-muted); font-size: 0.9rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer .footer-origin { display: block; margin-top: 0.8rem; font-size: 0.82rem; font-style: italic; color: var(--text-muted); opacity: 0.7; }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        background: rgba(7, 26, 31, 0.95);
-        padding: 1.5rem 2rem;
-        gap: 1rem;
-        border-bottom: 1px solid rgba(40, 181, 161, 0.15);
+        display: none; position: absolute; top: 100%; left: 0; width: 100%;
+        flex-direction: column; background: rgba(7,26,31,0.95);
+        padding: 1.5rem 2rem; gap: 1rem;
+        border-bottom: 1px solid rgba(40,181,161,0.15);
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .nav-toggle {
-        display: block;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
+      .nav-links.active { display: flex; }
+      .nav-toggle { display: block; }
+      .about-content { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
 
     /* ── Fade-in animation ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -487,60 +237,52 @@
     <a href="#" class="logo">Epidaurus <span>Telemedical</span></a>
     <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
     <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
+      <li><a href="#pillars">What It Does</a></li>
       <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="medical.html" class="nav-medical">Medical Use Applications →</a></li>
     </ul>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero with video background -->
   <section class="hero">
-    <span class="hero-badge">Thought Seeing · AI-powered Telemedicine</span>
-    <h1>Healthcare that <span class="highlight">sees</span> what you're <span class="highlight">thinking</span></h1>
-    <p>Epidaurus Telemedical combines intelligent diagnostics with compassionate remote care — making world-class medicine accessible from anywhere.</p>
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="videos/AI_Generates_Greek_Gods_VR_Video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <span class="hero-badge">Thought Seeing™ · Perception Engine</span>
+    <h1><span class="highlight">Thought</span> Seeing</h1>
+    <p>From surgical neuroscience to entertainment. A perception engine that lets you see what others think — and share what you see.</p>
+    <p class="hero-origin">Thought Seeing began as a surgical adjuvant — technology designed to predict perioperative comatose risk in patients with brain injury or disease. We have now adapted this into a non-invasive tool that predicts human perceptions in learning and recall, for entertainment purposes.</p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-primary">Get Started</a>
-      <a href="#features" class="btn btn-outline">Learn More</a>
+      <a href="#pillars" class="btn btn-primary">Explore</a>
+      <a href="#how-it-works" class="btn btn-outline">How It Works</a>
     </div>
   </section>
 
-  <!-- Features -->
-  <section id="features">
-    <p class="section-label fade-in">Features</p>
-    <h2 class="section-title fade-in">Intelligent care, delivered remotely</h2>
-    <p class="section-subtitle fade-in">Our platform leverages AI-assisted insight to support clinicians and empower patients — all within a secure, HIPAA-compliant environment.</p>
+  <!-- Three Pillars -->
+  <section id="pillars">
+    <p class="section-label fade-in">What Thought Seeing Does</p>
+    <h2 class="section-title fade-in">See. Learn. Connect.</h2>
+    <p class="section-subtitle fade-in">Three ways Thought Seeing transforms how humans share perception, absorb knowledge, and communicate across cultures.</p>
 
     <div class="features-grid">
       <div class="feature-card fade-in">
-        <div class="feature-icon">🧠</div>
-        <h3>Thought Seeing AI</h3>
-        <p>Proprietary diagnostic engine that synthesises patient history, symptoms, and behavioural cues to surface insights clinicians might miss.</p>
+        <div class="feature-icon">👁️</div>
+        <h3>See Thoughts</h3>
+        <p>Share visual memories and perceptions with others through an immersive VR headset. No typing, no talking — just thinking.</p>
       </div>
       <div class="feature-card fade-in">
-        <div class="feature-icon">📹</div>
-        <h3>HD Video Consultations</h3>
-        <p>Crystal-clear, low-latency video visits with integrated screen sharing, real-time annotations, and automatic session summaries.</p>
+        <div class="feature-icon">🧬</div>
+        <h3>Learn Differently</h3>
+        <p>The platform adapts to your circadian biology and attention patterns, optimising when and how you absorb and recall information.</p>
       </div>
       <div class="feature-card fade-in">
-        <div class="feature-icon">📊</div>
-        <h3>Continuous Monitoring</h3>
-        <p>Connect wearable devices and IoT sensors for real-time vitals tracking, with intelligent alerts when readings fall outside personalised thresholds.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🔒</div>
-        <h3>End-to-End Encryption</h3>
-        <p>Military-grade encryption for all data in transit and at rest. Full HIPAA, GDPR, and SOC 2 Type II compliance built into every layer.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">💊</div>
-        <h3>Smart Prescriptions</h3>
-        <p>Electronic prescribing with automatic drug-interaction checks, pharmacy integration, and refill management — all in one workflow.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🌐</div>
-        <h3>Multi-language Support</h3>
-        <p>Real-time translation across 40+ languages so language barriers never stand between a patient and quality care.</p>
+        <div class="feature-icon">🌍</div>
+        <h3>Feel Connected</h3>
+        <p>Emotion forecasting enables empathic communication across languages and cultures. Hosts on <a href="https://onbakerstreet.com" style="color: var(--accent);">OnBakerStreet.com</a> use Thought Seeing to serve diverse global clients without language barriers.</p>
       </div>
     </div>
   </section>
@@ -548,25 +290,21 @@
   <!-- How It Works -->
   <section id="how-it-works">
     <p class="section-label fade-in">How It Works</p>
-    <h2 class="section-title fade-in">From symptom to solution in four steps</h2>
-    <p class="section-subtitle fade-in">Our streamlined process ensures patients get the right care at the right time — without unnecessary friction.</p>
+    <h2 class="section-title fade-in">Three steps to shared perception</h2>
+    <p class="section-subtitle fade-in">A simple, intuitive experience — from headset to thought stream.</p>
 
     <div class="steps">
       <div class="step fade-in">
-        <h3>Describe</h3>
-        <p>Patients share symptoms through guided intake forms enhanced by Thought Seeing AI for thorough, accurate capture.</p>
+        <h3>Put on the headset</h3>
+        <p>Calibrated to your circadian rhythm, the headset creates an immersive environment tuned to your biology and attention patterns.</p>
       </div>
       <div class="step fade-in">
-        <h3>Match</h3>
-        <p>Our algorithm identifies the best-fit specialist based on condition, availability, patient history, and preferences.</p>
+        <h3>Think freely</h3>
+        <p>The engine reads perception patterns, not brain waves. Your visual thoughts, memories, and ideas are captured non-invasively.</p>
       </div>
       <div class="step fade-in">
-        <h3>Consult</h3>
-        <p>Live video visit with real-time AI assistance — the clinician sees diagnostic suggestions, relevant research, and risk factors as they consult.</p>
-      </div>
-      <div class="step fade-in">
-        <h3>Follow-up</h3>
-        <p>Automated care plans, prescription delivery, lab orders, and check-in reminders keep patients on the path to recovery.</p>
+        <h3>Share or receive</h3>
+        <p>Visual thoughts stream between connected users — for entertainment, learning, or cross-cultural communication.</p>
       </div>
     </div>
   </section>
@@ -574,30 +312,30 @@
   <!-- About -->
   <section id="about">
     <p class="section-label fade-in">About</p>
-    <h2 class="section-title fade-in">Built on the legacy of healing</h2>
+    <h2 class="section-title fade-in">From the operating room to the living room</h2>
 
     <div class="about-content fade-in">
       <div class="about-text">
-        <p>Named after the ancient Greek sanctuary of Epidaurus — a place where the sick travelled in search of divine healing — <strong>Epidaurus Telemedical</strong> carries that mission into the digital age.</p>
-        <p>We believe that geography should never determine the quality of healthcare someone receives. Our <strong>Thought Seeing</strong> platform combines decades of clinical research with cutting-edge artificial intelligence to deliver diagnostic support that augments — never replaces — the human clinician.</p>
-        <p>Founded by a multidisciplinary team of physicians, engineers, and healthcare operators, we are committed to building technology that serves patients first.</p>
+        <p><strong>Epidaurus Telemedical</strong> builds perception technology at the intersection of neuroscience, artificial intelligence, and human connection.</p>
+        <p>Our <strong>Thought Seeing</strong> platform was originally developed as a perioperative neurosurgical adjuvant — predicting comatose risk in patients undergoing brain surgery. Today, we've adapted that same precision into a non-invasive experience for entertainment, education, and empathic communication.</p>
+        <p>We believe the future of human interaction isn't faster typing or better screens — it's shared perception. Thought Seeing makes that future tangible.</p>
       </div>
       <div class="about-stats">
         <div class="stat">
-          <div class="stat-value">50k+</div>
-          <div class="stat-label">Patients served</div>
+          <div class="stat-value">40+</div>
+          <div class="stat-label">Languages</div>
         </div>
         <div class="stat">
           <div class="stat-value">99.7%</div>
           <div class="stat-label">Uptime SLA</div>
         </div>
         <div class="stat">
-          <div class="stat-value">40+</div>
-          <div class="stat-label">Languages</div>
-        </div>
-        <div class="stat">
           <div class="stat-value">12</div>
           <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Thoughts shared</div>
         </div>
       </div>
     </div>
@@ -607,7 +345,7 @@
   <section id="contact">
     <p class="section-label fade-in">Contact</p>
     <h2 class="section-title fade-in">Let's talk</h2>
-    <p class="section-subtitle fade-in">Whether you're a health system looking to expand virtual care or a patient seeking better access — we'd love to hear from you.</p>
+    <p class="section-subtitle fade-in">Curious about Thought Seeing? Whether you're a creator, educator, host, or just intrigued — we'd love to hear from you.</p>
 
     <div class="contact-grid fade-in">
       <div class="contact-info">
@@ -620,7 +358,11 @@
         </div>
         <div class="contact-detail">
           <span>📍</span>
-          <span>Mosae Zorg Industries · The Netherlands</span>
+          <span>Mosae Zorg Industries · Berlin</span>
+        </div>
+        <div class="contact-detail">
+          <span>🌐</span>
+          <span><a href="https://onbakerstreet.com" style="color: var(--accent);">OnBakerStreet.com</a> — Host Integration</span>
         </div>
       </div>
 
@@ -635,7 +377,8 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2026 Epidaurus Telemedical · Mosae Zorg Industries. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    <p>&copy; 2026 Epidaurus Telemedical · Mosae Zorg Industries. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="medical.html">Medical Applications</a></p>
+    <span class="footer-origin">Originally developed as a perioperative neurosurgical adjuvant. Now reimagined for entertainment, learning, and human connection.</span>
   </footer>
 
   <!-- Scroll fade-in -->

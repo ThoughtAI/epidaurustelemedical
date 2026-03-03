@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Applications — Epidaurus Telemedical</title>
+  <meta name="description" content="Epidaurus Telemedical medical applications — AI-powered perioperative neurosurgical adjuvant technology, SCN calibration, and clinical telemedicine.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚕️</text></svg>">
+  <style>
+    :root {
+      --primary: #0a5e6c;
+      --primary-light: #0d7a8c;
+      --accent: #28b5a1;
+      --accent-glow: #3edbc4;
+      --dark: #071a1f;
+      --text: #e4f0f2;
+      --text-muted: #8fb8bf;
+      --card-bg: rgba(13, 42, 50, 0.7);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: -1;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(10,94,108,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(40,181,161,0.12) 0%, transparent 50%),
+        linear-gradient(180deg, #050f13 0%, #071a1f 100%);
+    }
+
+    .bg-grid::after {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(40,181,161,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(40,181,161,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 20s linear infinite;
+    }
+
+    @keyframes gridShift {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(60px,60px); }
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(7,26,31,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(40,181,161,0.15);
+    }
+
+    .logo { font-size: 1.4rem; font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: 0.5px; }
+    .logo span { color: var(--text); font-weight: 300; }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+
+    .btn { display: inline-block; padding: 0.9rem 2.2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--primary-light)); color: #fff; border: none; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(40,181,161,0.3); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    .btn-outline:hover { background: rgba(40,181,161,0.1); transform: translateY(-2px); }
+    .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
+
+    /* Page header */
+    .page-header {
+      min-height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 8rem 2rem 3rem;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 1rem; max-width: 800px;
+    }
+
+    .page-header h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .page-header p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; }
+
+    /* Sections */
+    section { padding: 5rem 2rem; max-width: 1000px; margin: 0 auto; }
+    .section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 0.5rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 1rem; }
+    .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin-bottom: 2.5rem; }
+
+    .prose { color: var(--text-muted); font-size: 1.05rem; }
+    .prose p { margin-bottom: 1.2rem; }
+    .prose strong { color: var(--text); }
+
+    /* Feature cards */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .feature-card { background: var(--card-bg); border: 1px solid rgba(40,181,161,0.1); border-radius: 16px; padding: 2rem; transition: all 0.3s ease; }
+    .feature-card:hover { border-color: rgba(40,181,161,0.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .feature-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.2rem; background: linear-gradient(135deg, rgba(40,181,161,0.15), rgba(10,94,108,0.25)); border: 1px solid rgba(40,181,161,0.2); }
+    .feature-card h3 { font-size: 1.2rem; margin-bottom: 0.6rem; }
+    .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Divider */
+    .divider { border: none; border-top: 1px solid rgba(40,181,161,0.12); margin: 3rem 0; }
+
+    /* Blockquote */
+    .origin-quote {
+      border-left: 3px solid var(--accent); padding: 1.5rem 2rem; margin: 2.5rem 0;
+      background: rgba(40,181,161,0.05); border-radius: 0 12px 12px 0;
+      font-style: italic; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;
+    }
+
+    /* Footer */
+    footer { border-top: 1px solid rgba(40,181,161,0.1); padding: 2.5rem 2rem; text-align: center; }
+    footer p { color: var(--text-muted); font-size: 0.9rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer .footer-origin { display: block; margin-top: 0.8rem; font-size: 0.82rem; font-style: italic; color: var(--text-muted); opacity: 0.7; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; flex-direction: column; background: rgba(7,26,31,0.95); padding: 1.5rem 2rem; gap: 1rem; border-bottom: 1px solid rgba(40,181,161,0.15); }
+      .nav-links.active { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">Epidaurus <span>Telemedical</span></a>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#clinical">Clinical Platform</a></li>
+      <li><a href="#neuroscience">Neuroscience</a></li>
+      <li><a href="#origin">Origin Story</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1><span class="highlight">Medical</span> Applications</h1>
+    <p>Thought Seeing began as a perioperative neurosurgical adjuvant — technology designed to predict comatose risk in patients with brain injury or disease. Here is the science and the story behind the platform.</p>
+  </div>
+
+  <!-- Clinical Platform -->
+  <section id="clinical">
+    <p class="section-label fade-in">Clinical Platform</p>
+    <h2 class="section-title fade-in">AI-powered diagnostic support</h2>
+    <p class="section-subtitle fade-in">Our clinical engine synthesises patient data to support clinicians across the full care journey — from triage to follow-up.</p>
+
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🧠</div>
+        <h3>Thought Seeing AI</h3>
+        <p>Proprietary diagnostic engine that synthesises patient history, symptoms, and behavioural cues to surface insights clinicians might miss.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">📹</div>
+        <h3>HD Video Consultations</h3>
+        <p>Crystal-clear, low-latency video visits with integrated screen sharing, real-time annotations, and automatic session summaries.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">📊</div>
+        <h3>Continuous Monitoring</h3>
+        <p>Connect wearable devices and IoT sensors for real-time vitals tracking, with intelligent alerts when readings fall outside personalised thresholds.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🔒</div>
+        <h3>End-to-End Encryption</h3>
+        <p>Military-grade encryption for all data in transit and at rest. Full HIPAA, GDPR, and SOC 2 Type II compliance built into every layer.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">💊</div>
+        <h3>Smart Prescriptions</h3>
+        <p>Electronic prescribing with automatic drug-interaction checks, pharmacy integration, and refill management — all in one workflow.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🌐</div>
+        <h3>Multi-language Support</h3>
+        <p>Real-time translation across 40+ languages so language barriers never stand between a patient and quality care.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Neuroscience -->
+  <section id="neuroscience">
+    <p class="section-label fade-in">Neuroscience</p>
+    <h2 class="section-title fade-in">The science behind Thought Seeing</h2>
+
+    <div class="prose fade-in">
+      <p><strong>Artificial Intelligence</strong> — Adaptive algorithms that learn temporal signatures of individual perception, mapping attention, focus, and insight within each user's neural landscape.</p>
+
+      <p><strong>Circadian Calibration</strong> — VR environments calibrated to circadian biology, specifically the suprachiasmatic nucleus (SCN) and associated retinal-hypothalamic pathways, optimising conditions for therapeutic perception and recall. The SCN acts as the body's master clock, and our platform synchronises immersive stimuli to each individual's circadian phase for maximum neurological receptivity.</p>
+
+      <p><strong>Emotion Forecasting</strong> — Predictive modelling of affective state transitions, enabling anticipatory clinical response and empathic cross-cultural communication for diverse patient populations. By reading micro-patterns in perception data, the platform can anticipate emotional shifts before conscious awareness — allowing clinicians to adapt their approach in real time.</p>
+
+      <p><strong>Perioperative Application</strong> — The technology was originally designed to predict perioperative comatose risk in patients with brain injury or neurodegenerative disease. By monitoring perception pattern stability during pre-surgical assessment, the system identifies patients at elevated risk of consciousness disorders during and after surgery — enabling earlier intervention and better-informed surgical planning.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="prose fade-in">
+      <p><strong>Clinical Workflow Integration</strong></p>
+      <p>In the clinical setting, our streamlined four-step process ensures patients receive the right care at the right time:</p>
+      <p><strong>1. Describe</strong> — Patients share symptoms through guided intake forms enhanced by Thought Seeing AI for thorough, accurate capture.</p>
+      <p><strong>2. Match</strong> — The algorithm identifies the best-fit specialist based on condition, availability, patient history, and preferences.</p>
+      <p><strong>3. Consult</strong> — Live video visit with real-time AI assistance — the clinician sees diagnostic suggestions, relevant research, and risk factors as they consult.</p>
+      <p><strong>4. Follow-up</strong> — Automated care plans, prescription delivery, lab orders, and check-in reminders keep patients on the path to recovery.</p>
+    </div>
+  </section>
+
+  <!-- Origin Story -->
+  <section id="origin">
+    <p class="section-label fade-in">Origin Story</p>
+    <h2 class="section-title fade-in">The sanctuary of healing</h2>
+
+    <div class="prose fade-in">
+      <p>Named after the ancient Greek sanctuary of <strong>Epidaurus</strong> — a place where the sick travelled in search of divine healing — Epidaurus Telemedical carries that mission into the digital age.</p>
+
+      <p>Epidaurus was the sanctuary of Apollo — the first hospital of the Western world. Patients ascended the mountain to be closest to the healing sun. Within the <strong>Abaton</strong>, the harmless serpents of Asclepius moved across patients' bodies, inducing a calm from which visions arose — prescriptions from the patients' own consciousness.</p>
+
+      <blockquote class="origin-quote">
+        The headset is the new Abaton. The calibrated light is the new sun. The algorithm is the serpent.
+      </blockquote>
+
+      <p>We believe that geography should never determine the quality of healthcare someone receives. Our <strong>Thought Seeing</strong> platform combines decades of clinical research with cutting-edge artificial intelligence to deliver diagnostic support that augments — never replaces — the human clinician.</p>
+
+      <p>Founded by a multidisciplinary team of physicians, engineers, and healthcare operators, we are committed to building technology that serves patients first.</p>
+    </div>
+  </section>
+
+  <!-- Back to main site -->
+  <section style="text-align: center; padding: 2rem 2rem 5rem;">
+    <a href="index.html" class="btn btn-outline">← Back to Main Site</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Epidaurus Telemedical · Mosae Zorg Industries. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    <span class="footer-origin">Originally developed as a perioperative neurosurgical adjuvant. Now reimagined for entertainment, learning, and human connection.</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
